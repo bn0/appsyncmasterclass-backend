@@ -1,0 +1,9 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeForeground": "#fff",
+    "titleBar.inactiveForeground": "#a7a4a4cc",
+    "titleBar.activeBackground": "#7a289b",
+    "titleBar.inactiveBackground": "#7a289b9c"
+  },
+  "docker.host": "ssh://bn0@dev.epsilon.red",
+}

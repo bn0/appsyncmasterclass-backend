@@ -1,0 +1,23 @@
+{
+  "name": "appsync-masterclass-backend",
+  "context": "..",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace/",
+  "remoteUser": "node",
+  "extensions": [
+    "mutantdino.resourcemonitor",
+    "mikestead.dotenv",
+    "donjayamanne.githistory",
+    "arturock.gitstash",
+    "wayou.vscode-todo-highlight",
+    "wakatime.vscode-wakatime",
+    "ms-azuretools.vscode-docker",
+    "kumar-harsh.graphql-for-vscode",
+    "ThreadHeap.serverless-ide-vscode",
+    "bradlc.vscode-tailwindcss",
+    "sodatea.velocity",
+    "octref.vetur",
+    "ddejong.vscode-cfn-lint"
+  ]
+}

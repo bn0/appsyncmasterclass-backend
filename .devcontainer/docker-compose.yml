@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  app:
+    container_name: appsync-masterclass-backend
+    # Uncomment the next line to use a non-root user. On Linux, this will prevent
+    # new files getting created as root, but you may need to update the USER_UID
+    # and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
+    user: node
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        WAKATIME_API_KEY: ${WAKATIME_API_KEY}
+        AWS_REGION: ${AWS_REGION}
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    env_file: ../.env
+    volumes:
+      - /opt/docker/data/resilio/sync/src/appsync-masterclass/backend:/workspace:cached
+      - appsync-masterclass-backend.bashhistory.16d72d7b:/bash_history
+      - appsync-masterclass-backend.ext.16d72d7b:/home/vscode/.vscode-server/extensions
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+volumes:
+  appsync-masterclass-backend.bashhistory.16d72d7b:
+  appsync-masterclass-backend.ext.16d72d7b:
