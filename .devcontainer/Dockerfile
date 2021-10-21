@@ -61,6 +61,8 @@ USER $USERNAME
 RUN pip install --upgrade setuptools \
     && sudo pip install cfn-lint --ignore-installed
 
+# Upgrade NPM
+RUN npm install -g npm
 
 # Add virtual env to path
 # RUN echo "PATH=$USER_HOME/.poetry/bin:\$PATH" >> ${USER_HOME}/.bashrc
