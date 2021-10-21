@@ -54,7 +54,8 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/bash_history
 USER $USERNAME
 
 # Install Serverless Framework
-RUN curl -o- -L https://slss.io/install | bash
+# NOTE: Don't install now because v2.5.0 currently breaks serverless-iam-roles-per-function
+# RUN curl -o- -L https://slss.io/install | bash
 
 # Install CFN-Lint
 RUN pip install --upgrade setuptools \
