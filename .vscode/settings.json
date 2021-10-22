@@ -6,4 +6,13 @@
     "titleBar.inactiveBackground": "#7a289b9c"
   },
   "docker.host": "ssh://bn0@dev.epsilon.red",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": [
+        "-l"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh"
 }

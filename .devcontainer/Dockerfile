@@ -13,11 +13,18 @@ ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ARG USER_HOME=/home/${USERNAME}
+
+# AWS parameters
+ARG AWS_REGION=ap-southeast-2
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+
+# Misc parameters
 ARG WAKATIME_API_KEY=""
 
 # Configure apt and install packages
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
+    && apt-get install -y --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
     # && apt-get -y install git procps lsb-release \
@@ -31,8 +38,12 @@ RUN apt-get update \
 # Set up user and environment
 RUN getent group ${USER_GID} > /dev/null 2>&1 || groupadd --gid $USER_GID $USERNAME \
     && id -u ${USER_UID} >/dev/null 2>&1 || useradd -s /bin/bash --uid ${USER_UID} --gid ${USER_GID} -m $USERNAME -d ${USER_HOME} -k /etc/skel \
-    # [Optional] Uncomment the next three lines to add sudo support
-    && apt-get install -y sudo \
+    # [Optional] Add sudo support
+    && apt-get install -y --no-install-recommends sudo 2>&1 \
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/* \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     # Create extensions folder with owner $USERNAME, or it will be created as root and fail
@@ -44,7 +55,8 @@ RUN getent group ${USER_GID} > /dev/null 2>&1 || groupadd --gid $USER_GID $USERN
 # Persist bash history
 RUN mkdir -p /bash_history/ \
     && touch /bash_history/.bash_history \
-    && chown ${USER_UID}:${USER_GID} /bash_history/.bash_history
+    && chown -R ${USER_UID}:${USER_GID} /bash_history \
+    && chmod -R 755 /bash_history
 
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/bash_history/.bash_history" \
     && echo $SNIPPET >> ${USER_HOME}/.bash_profile \
@@ -73,6 +85,11 @@ RUN npm install -g npm
 
 # Add WakaTime config
 RUN echo '\n[settings]\napi_key = '${WAKATIME_API_KEY}'\n' > ${USER_HOME}/.wakatime.cfg
+
+# Set AWS profile config
+RUN mkdir -p ${USER_HOME}/.aws \
+    && echo '\n[redmacaw]\nregion='${AWS_REGION}'\n' > ${USER_HOME}/.aws/config \
+    && echo '\n[redmacaw]\naws_access_key_id='${AWS_ACCESS_KEY_ID}'\naws_secret_access_key='${AWS_SECRET_ACCESS_KEY}'\n' > ${USER_HOME}/.aws/credentials
 
 # Ensure permissions are correct for user home
 RUN chown -R ${USER_UID}:${USER_GID} ${USER_HOME}
