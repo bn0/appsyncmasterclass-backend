@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "sls": "sls",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "export-env": "sls export-env --all",
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "aws-sdk": "^2.1012.0",
     "serverless": "2.4.0",
     "serverless-appsync-plugin": "^1.12.0",
+    "serverless-export-env": "^2.0.0",
     "serverless-iam-roles-per-function": "^3.2.0"
   },
   "dependencies": {

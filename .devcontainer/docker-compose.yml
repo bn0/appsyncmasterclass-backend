@@ -15,7 +15,7 @@ services:
         AWS_REGION: ${AWS_REGION}
         AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
         AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-    env_file: ../.env
+    env_file: ../.env.dev
     volumes:
       - /opt/docker/data/resilio/sync/src/appsync-masterclass/backend:/workspace:cached
       - appsync-masterclass-backend.bashhistory.16d72d7b:/bash_history

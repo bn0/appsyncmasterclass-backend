@@ -1,9 +1,10 @@
 service: appsync-masterclass-backend
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 plugins:
   - serverless-appsync-plugin
   - serverless-iam-roles-per-function
+  - serverless-export-env
 
 provider:
   name: aws
@@ -12,6 +13,8 @@ provider:
   environment:
     STAGE: ${self:custom.stage}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    AWS_REGION: ${self:custom.region}
+    COGNITO_USER_POOL_ID: !Ref CognitoUserPool
 
 package:
   exclude:
@@ -19,9 +22,13 @@ package:
     - package.json
 
 custom:
-  stage: ${opt:stage, self:provider.stage}  # Will use "dev" if unspecified in provider
+  stage: ${opt:stage, self:provider.stage} # Will use "dev" if unspecified in provider
+  region: ${opt:region, self:provider.region}
   appSync:
     - ${file(serverless.appsync-api.yml)}
+  export-env:
+    filename: .env
+    overwrite: true
 
 functions:
   confirmUserSignup:
