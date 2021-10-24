@@ -7,6 +7,7 @@
   "scripts": {
     "sls": "sls",
     "export-env": "sls export-env --all",
+    "integration-test": "jest --verbose ./__tests__/test_cases/integration"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,10 @@
   },
   "homepage": "https://github.com/bn0/appsyncmasterclass-backend#readme",
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "aws-sdk": "^2.1012.0",
+    "dotenv": "^10.0.0",
+    "jest": "^27.3.1",
     "serverless": "2.4.0",
     "serverless-appsync-plugin": "^1.12.0",
     "serverless-export-env": "^2.0.0",
