@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "sls": "sls",
-    "export-env": "sls export-env --all",
+    "export-env": "sls export-env --all && sls manifest",
     "test": "jest --verbose ./__tests__/test_cases/unit",
     "integration-test": "jest --verbose ./__tests__/test_cases/integration",
     "e2e-test": "jest --verbose ./__tests__/test_cases/e2e"
@@ -27,12 +27,15 @@
     "amplify-appsync-simulator": "^1.27.7",
     "amplify-velocity-template": "^1.4.5",
     "aws-sdk": "^2.1012.0",
+    "axios": "^0.23.0",
     "dotenv": "^10.0.0",
     "jest": "^27.3.1",
+    "lodash": "^4.17.21",
     "serverless": "2.4.0",
     "serverless-appsync-plugin": "^1.12.0",
     "serverless-export-env": "^2.0.0",
-    "serverless-iam-roles-per-function": "^3.2.0"
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-manifest-plugin": "^1.0.9"
   },
   "dependencies": {
     "chance": "^1.1.8"
