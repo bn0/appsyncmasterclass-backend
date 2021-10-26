@@ -5,7 +5,7 @@
     "titleBar.activeBackground": "#7a289b",
     "titleBar.inactiveBackground": "#7a289b9c"
   },
-  "docker.host": "ssh://bn0@dev.epsilon.red",
+  "docker.host": "ssh://bn0@awsdev.epsilon.red",
   "terminal.integrated.profiles.linux": {
     "zsh": {
       "path": "/bin/zsh",
