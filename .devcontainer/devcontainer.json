@@ -10,6 +10,7 @@
     "mikestead.dotenv",
     "donjayamanne.githistory",
     "arturock.gitstash",
+    "sleistner.vscode-fileutils",
     "esbenp.prettier-vscode",
     "wayou.vscode-todo-highlight",
     "wakatime.vscode-wakatime",
