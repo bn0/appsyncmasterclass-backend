@@ -48,7 +48,7 @@ const a_user_signs_up = async (password, name, email) => {
     .promise();
 
   const username = signUpResp.UserSub;
-  console.log(`[${email}] - user has sined up [${username}]`);
+  console.log(`[${email}] - user has signed up [${username}]`);
 
   await cognito
     .adminConfirmSignUp({
