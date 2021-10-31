@@ -1,9 +1,7 @@
-const { truncate } = require("fs/promises");
-const path = require("path");
-const chance = require("chance").Chance();
-
 const given = require("../../steps/given");
 const when = require("../../steps/when");
+const chance = require("chance").Chance();
+const path = require("path");
 
 describe("Mutation.editMyProfile.request template", () => {
   it("Should use 'newProfile' fields in expression values", () => {
@@ -13,8 +11,10 @@ describe("Mutation.editMyProfile.request template", () => {
     );
 
     const username = chance.guid();
+    const firstName = "Ezra";
+
     const newProfile = {
-      name: "Ezra",
+      name: firstName,
       imageUrl: null,
       backgroundImageUrl: null,
       bio: "test",
@@ -42,7 +42,7 @@ describe("Mutation.editMyProfile.request template", () => {
         },
         expressionValues: {
           ":name": {
-            S: "Ezra",
+            S: firstName,
           },
           ":imageUrl": {
             NULL: true,
@@ -63,9 +63,9 @@ describe("Mutation.editMyProfile.request template", () => {
             NULL: true,
           },
         },
-        condition: {
-          expression: "attributes_exists(id)",
-        },
+      },
+      condition: {
+        expression: "attribute_exists(id)",
       },
     });
   });
