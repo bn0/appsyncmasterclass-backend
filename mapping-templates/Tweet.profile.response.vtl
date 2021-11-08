@@ -1,4 +1,4 @@
-#if (!util.isNull($context.result))
+#if (!$util.isNull($context.result))
   #if ($context.result.id == $context.identity.username)
     #set ($context.result["__typename"] = "MyProfile")
   #else
