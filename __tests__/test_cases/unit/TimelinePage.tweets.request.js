@@ -46,7 +46,7 @@ describe("TimelinePage.tweets.request template", () => {
       version: "2018-05-29",
       operation: "BatchGetItem",
       tables: {
-        "${TweetsTable}": {
+        "appsync-masterclass-backend-dev-TweetsTable-358VLE3XQP1F": {
           keys: [
             {
               id: {
