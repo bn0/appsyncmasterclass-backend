@@ -13,7 +13,7 @@ const a_random_user = () => {
   });
   const name = `${firstName} ${lastName} ${suffix}`;
   const password = chance.string({ length: 8 });
-  const email = `${firstName}-${lastName}-${suffix}@appsyncmasterclass.com`;
+  const email = `success+${firstName}-${lastName}-${suffix}@simulator.amazonses.com`;
 
   return {
     name,
