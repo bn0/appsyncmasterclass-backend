@@ -1,5 +1,6 @@
 service: appsync-masterclass-backend
 frameworkVersion: "2"
+variablesResolutionMode: 20210326
 
 plugins:
   - serverless-appsync-plugin
@@ -11,6 +12,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: ap-southeast-2
+  stage: dev
+  lambdaHashingVersion: 20201221
   environment:
     STAGE: ${self:custom.stage}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
