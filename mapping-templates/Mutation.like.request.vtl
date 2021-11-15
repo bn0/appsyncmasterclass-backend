@@ -3,7 +3,7 @@
   "operation": "TransactWriteItems",
   "transactItems": [
     {
-      "table": "${LikesTable}",
+      "table": "appsync-masterclass-backend-dev-LikesTable-1K6GKIYPN1EF9",
       "operation": "PutItem",
       "key": {
         "userId": $util.dynamodb.toDynamoDBJson($context.identity.username),
@@ -14,7 +14,7 @@
       }
     },
     {
-      "table": "${TweetsTable}",
+      "table": "appsync-masterclass-backend-dev-TweetsTable-358VLE3XQP1F",
       "operation": "UpdateItem",
       "key": {
         "id": $util.dynamodb.toDynamoDBJson($context.arguments.tweetId)
