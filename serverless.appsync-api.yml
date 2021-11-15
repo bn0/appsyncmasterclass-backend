@@ -23,6 +23,8 @@ mappingTemplates:
   - type: Query
     field: getMyTimeline
     dataSource: timelinesTable
+    substituions:
+      TweetsTable: !Ref TweetsTable
 
   # MUTATIONS
   - type: Mutation
@@ -33,6 +35,12 @@ mappingTemplates:
     dataSource: tweetFunction
     request: false
     response: false
+  - type: Mutation
+    field: like
+    dataSource: likeMutation
+    substituions:
+      LikesTable: !Ref LikesTable
+      UsersTable: !Ref TweetsTable
 
   # NESTED FIELDS
   - type: Tweet
@@ -57,6 +65,24 @@ dataSources:
     name: timelinesTable
     config:
       tableName: !Ref TimelinesTable
+  - type: AMAZON_DYNAMODB
+    name: likesTable
+    config:
+      tableName: !Ref LikesTable
+  - type: AMAZON_DYNAMODB
+    name: likeMutation
+    config:
+      tableName: !Ref LikesTable
+      iamRoleStatements:
+        - Effect: Allow
+          Action: dynamodb:PutItem
+          Resource: !GetAtt LikesTable.Arn
+        - Effect: Allow
+          Action: dynamodb:UpdateItem
+          Resource:
+            - !GetAtt UsersTable.Arn
+            - !GetAtt TweetsTable.Arn
+
   - type: AWS_LAMBDA
     name: getImageUploadUrlFunction
     config:
@@ -65,7 +91,8 @@ dataSources:
     name: tweetFunction
     config:
       functionName: tweet
-
-# SUBSTITUTIONS
-substituions:
-  TweetsTable: !Ref TweetsTable
+# SUBSTITUTIONS (don't fucking work)
+# substituions:
+#   TweetsTable: !Ref TweetsTable
+#   LikesTable: !Ref LikesTable
+#   UsersTable: !Ref UsersTable

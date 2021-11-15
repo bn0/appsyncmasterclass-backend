@@ -1,0 +1,33 @@
+{
+  "version": "2018-05-29",
+  "operation": "TransactWriteItems",
+  "transactItems": [
+    {
+      "table": "${LikesTable}",
+      "operation": "PutItem",
+      "key": {
+        "userId": $util.dynamodb.toDynamoDBJson($context.identity.username),
+        "tweetId": $util.dynamodb.toDynamoDBJson($context.arguments.tweetId)
+      },
+      "condition": {
+        "expression": "attribute_not_exists(tweetId)"
+      }
+    },
+    {
+      "table": "${TweetsTable}",
+      "operation": "UpdateItem",
+      "key": {
+        "id": $util.dynamodb.toDynamoDBJson($context.arguments.tweetId)
+      },
+      "update": {
+        "updateExpression": "ADD likes :one",
+        "expressionAttributeValues": {
+          ":one": $util.dynamodb.toDynamoDBJson(1)
+        }
+      },
+      "condition": {
+        "expression": "attribute_exists(id)"
+      }
+    }
+  ]
+}
